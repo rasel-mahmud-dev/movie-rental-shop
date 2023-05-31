@@ -1,0 +1,22 @@
+#root {
+
+
+}
+
+
+.container{
+  max-width: 1200px;
+  margin: auto;
+  width: 100%;
+}
+
+.h4{
+  font-size: 25px;
+  font-weight: 600;
+  color: #f6f6f6;
+}
+.h5{
+  font-size: 22px;
+  font-weight: 600;
+  color: #f6f6f6;
+}
