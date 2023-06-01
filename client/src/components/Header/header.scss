@@ -15,12 +15,16 @@ header {
 }
 
 .nav-item {
-  color: white;
+  color: #ececec;
   list-style: none;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 14px;
   padding: 0 16px;
 
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 
   &:hover {
     color: var(--primary);

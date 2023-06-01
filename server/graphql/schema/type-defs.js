@@ -4,13 +4,16 @@ const {gql} = require("apollo-server")
 const typeDefs =  gql`
     type User {
         id: ID!
-        name: String!
-        email: String!
+        firstName: String!
+        lastName: String!
         password: String!
         createdAt: String!
         updatedAt: String!
-        firstName: String
-        email: String
+        role: String!
+        email: String!
+        aboutMe: String
+        gender: String
+        birthday: String
         avatar: String
         favoriteMovies: [Movie]
     }
@@ -37,6 +40,25 @@ const typeDefs =  gql`
         lastName: String
         email: String
         password: String
+        aboutMe: String
+        gender: String
+        birthday: String
+        avatar: String
+    }
+    
+    input LoginUserInput {
+        email: String
+        password: String
+    }
+    
+    type RegistrationResponse {
+        id: Int
+        firstName: String 
+        lastName: String
+        role: String
+        email: String
+        avatar: String
+        token: String
     }
 
     input NewMovieInput {
@@ -44,23 +66,24 @@ const typeDefs =  gql`
         price: Int
         releaseYear: Int
     }
-
-    type RootMutation {
-        createMovie(eventInput: NewMovieInput) : Movie
-        createUser(userInput: NewUserInput): User
+    
+    type Mutation {
+        createMovie(eventInput: NewMovieInput): Movie
+        createUser(userInput: NewUserInput): RegistrationResponse
+        loginUser(userInput: LoginUserInput): RegistrationResponse
         bookMovie(eventId: ID!): Movie!
     }
 
     type Query {
         users: [User]
         user(id: ID!): User
+        authVerify: RegistrationResponse
     }
 
     schema {
         query: Query
-        mutation: RootMutation
+        mutation: Mutation
     }
     
 `
-
 module.exports = typeDefs

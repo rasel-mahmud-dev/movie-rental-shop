@@ -1,3 +1,4 @@
+const {createUser, loginUser, authVerify} = require("./auth");
 
 
 const users = [
@@ -23,6 +24,7 @@ const users = [
 
 const resolvers ={
     Query: {
+        authVerify: authVerify,
         users(){
             return users
         },
@@ -56,17 +58,17 @@ const resolvers ={
         //     return user;
         // },
 
+        createUser: createUser,
+        loginUser: loginUser,
 
-        createUser: (parent, { input }) => {
 
-            console.log(input)
+        createMovie: (parent, { input }) => {
+        },
 
+        bookMovie: (parent, { input }) => {
         }
-
-
-
-
     },
+
 }
 
 module.exports = resolvers

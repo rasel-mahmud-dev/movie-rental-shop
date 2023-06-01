@@ -1,4 +1,3 @@
-
 const graphql = require("graphql")
 
 const {ApolloServer} = require("apollo-server")
@@ -10,9 +9,12 @@ const connectDatabase = require("./helpers/connectDatabase");
 
 const server = new ApolloServer({
     typeDefs,
-    resolvers
+    resolvers,
+    context: ({req}) => {
+        const token = req.headers.token || ""
+        return {token}
+    }
 })
-
 
 
 // connect(
@@ -28,12 +30,12 @@ const server = new ApolloServer({
 //     });
 //
 
-server.listen(4000).then(({url})=>{
+server.listen(4000).then(({url}) => {
     console.log(url)
 })
 
-connectDatabase().then((connection)=>{
-    console.log(connection)
-}).catch(ex=>{
+connectDatabase().then((connection) => {
+    // console.log(connection)
+}).catch(ex => {
     console.log(ex)
 })

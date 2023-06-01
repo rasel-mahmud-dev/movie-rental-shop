@@ -1,7 +1,11 @@
 import {PlusOutlined} from '@ant-design/icons';
 import {Button, DatePicker, Form, Input, message, Radio,  Switch,  Upload,} from 'antd';
 import React, {useState} from 'react';
+import {Link} from "react-router-dom";
 
+
+import { useMutation } from '@apollo/client';
+import { gql } from 'graphql-tag';
 
 const {TextArea} = Input;
 
@@ -12,7 +16,24 @@ const normFile = (e) => {
     return e?.fileList;
 };
 
+const CREATE_USER = gql`
+    mutation AddUser($userInput: NewUserInput!) {
+        createUser(userInput: $userInput) {
+            firstName
+            lastName
+            email
+            password
+            aboutMe
+            gender
+            birthday
+            avatar
+        }
+    }
+`;
+
 const Registration = () => {
+
+    const [createUser, { loading, error }] = useMutation(CREATE_USER);
 
 
     function handleAction(fields){
@@ -21,8 +42,10 @@ const Registration = () => {
             lastName,
             email,
             gender,
-            birthDay,
+            birthday,
             aboutMe,
+            password,
+            avatar,
             rememberMe,
         }  = fields
 
@@ -41,6 +64,24 @@ const Registration = () => {
         }
 
 
+        createUser({
+            variables: {
+                userInput: {
+                    firstName,
+                    lastName,
+                    email,
+                    password,
+                    aboutMe,
+                    gender,
+                    birthday,
+                    avatar,
+                }
+            }
+        }).then(r =>{
+            console.log(r)
+        }).catch(ex=>{
+            console.log(ex)
+        })
 
     }
 
@@ -73,11 +114,10 @@ const Registration = () => {
                         <Input placeholder="Email"/>
                     </Form.Item>
 
-                    {/*<Form.Item label="Select">*/}
-                    {/*    <Select>*/}
-                    {/*        <Select.Option value="demo">Demo</Select.Option>*/}
-                    {/*    </Select>*/}
-                    {/*</Form.Item>*/}
+                    <Form.Item name="password" label="Password">
+                        <Input placeholder="Password"/>
+                    </Form.Item>
+
 
 
                     <Form.Item name="gender" label="Gender">
@@ -88,7 +128,7 @@ const Registration = () => {
                     </Form.Item>
 
 
-                    <Form.Item name="birthDay" label="Birth Date">
+                    <Form.Item name="birthday" label="Birth Date">
                         <DatePicker placeholder="Date of Birth" className="w-full"/>
                     </Form.Item>
 
@@ -116,6 +156,12 @@ const Registration = () => {
                             <Button htmlType="submit" >Create Account</Button>
                         </Form.Item>
                     </div>
+
+                    <div>
+                        <p className="text-label">Already have an account? <Link to="/login">Login here</Link> </p>
+                    </div>
+
+
                 </Form
                 >
             </div>

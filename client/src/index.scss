@@ -99,10 +99,12 @@ h1, h2, h3, h4 {
   }
 }
 
-.ant-form-item-label {
+.ant-form-item-label, {
   label {
     color: white !important;
+
   }
+  //padding: 0 !important;
 }
 
 .ant-radio-wrapper{
