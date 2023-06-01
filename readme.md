@@ -1,5 +1,15 @@
 
 
+
+### Technologies 
+- Zustand 
+- GraphQL
+- MYSQL
+- Antd
+- React
+- Tailwindcss
+
+
 ### Tables 
 #### User
 - firstName
@@ -19,17 +29,16 @@
 - stock
 - price
 - discount
-- casts
+- casts string
 - director
 - summary
 - country
-- genre
-- category   JSON[]
-- sellerId ref seller table
+- genres [ids] JSON
+- sellerId ref seller table id
 - releasedYear: Date
-- duration
+- duration int
 
 #### Rating
 - movieId int
 - rate int
-- 
+- customerId

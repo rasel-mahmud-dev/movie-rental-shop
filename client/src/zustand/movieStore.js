@@ -1,9 +1,10 @@
-
-
-import {create} from "zustand"
-
-const movieStore = create({
+const movieStore = (set, get) => ({
     movies: [],
+    setMovies(movies) {
+        set({
+            movies: movies
+        })
+    }
 
 })
 

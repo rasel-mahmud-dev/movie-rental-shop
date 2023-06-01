@@ -15,7 +15,6 @@ function App() {
         if (data && data.authVerify) {
             setAuth(data.authVerify)
         }
-
     }, [data, loading])
 
     return (

@@ -1,5 +1,8 @@
  import {ApolloClient, ApolloLink, HttpLink, InMemoryCache} from '@apollo/client';
 
+
+export const backend = "http://localhost:4000"
+
 const authLink = new ApolloLink((operation, forward)=>{
     operation.setContext(({headers = {}})=>{
         return {
@@ -14,7 +17,7 @@ const authLink = new ApolloLink((operation, forward)=>{
 
 const client = new ApolloClient({
     link: authLink.concat(new HttpLink({
-        uri: 'http://localhost:4000', // Replace with your GraphQL server endpoint
+        uri: backend + '/graphql', // Replace with your GraphQL server endpoint
     })),
     cache: new InMemoryCache(),
 });

@@ -1,14 +1,16 @@
 const {gql} = require("apollo-server")
 
-
 const typeDefs =  gql`
+
+    scalar GraphQLDateTime
+    
     type User {
         id: ID!
         firstName: String!
         lastName: String!
         password: String!
-        createdAt: String!
-        updatedAt: String!
+        createdAt: GraphQLDateTime
+        updatedAt: GraphQLDateTime
         role: String!
         email: String!
         aboutMe: String
@@ -19,10 +21,20 @@ const typeDefs =  gql`
     }
 
     type Movie {
+        id: Int
         title: String
+        thumb: String
         price: Int
-        releaseYear: Int
         author: String
+        genres: [String]
+        stock: Int
+        country: String
+        director: String
+        casts: String
+        duration: Int
+        releasedYear: GraphQLDateTime
+        summary: String
+        images: [String]
     }
 
     type Author {
@@ -63,12 +75,19 @@ const typeDefs =  gql`
 
     input NewMovieInput {
         title: String
+        genres: [String]
+        stock: Int
         price: Int
-        releaseYear: Int
+        country: String
+        director: String
+        casts: String
+        duration: Int
+        releasedYear: GraphQLDateTime
+        summary: String
     }
     
     type Mutation {
-        createMovie(eventInput: NewMovieInput): Movie
+        createMovie(movieInput: NewMovieInput): Movie
         createUser(userInput: NewUserInput): RegistrationResponse
         loginUser(userInput: LoginUserInput): RegistrationResponse
         bookMovie(eventId: ID!): Movie!
@@ -78,6 +97,9 @@ const typeDefs =  gql`
         users: [User]
         user(id: ID!): User
         authVerify: RegistrationResponse
+        getHomeSliderMovies: Movie
+        getMovies: [Movie]
+        getMovie(id: String!): Movie
     }
 
     schema {

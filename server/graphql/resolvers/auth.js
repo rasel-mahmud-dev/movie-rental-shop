@@ -1,82 +1,62 @@
-
 const bcrypt = require('bcryptjs');
 const connectDatabase = require("../../helpers/connectDatabase");
 const sqlDate = require("../../helpers/sqlDate");
 const jwt = require("jsonwebtoken")
 
 
-const JWT_SECRET  = "SOME_SUPER_SECRET"
+const JWT_SECRET = "SOME_SUPER_SECRET"
 
 module.exports = {
-    createUser: async (parent, {userInput} ) => {
+    createUser: async (parent, {userInput}) => {
 
         try {
             const connection = await connectDatabase()
-            let [user] = await connection.query(`select email from users where email = ?`,  [userInput.email])
+            let [user] = await connection.query(`select email from users where email = ?`, [userInput.email])
             console.log(user)
 
-           try{
-               let [a] = await connection.execute(`
+            try {
+                let [a] = await connection.execute(`
                 insert into users(firstName, lastName, email, password, aboutMe, gender, birthday) Values(?, ?, ?, ?, ?, ?, ?)`,
-                [userInput.firstName, userInput.lastName, userInput.email, userInput.password, userInput.aboutMe, userInput.gender, sqlDate(userInput.birthday)])
+                    [userInput.firstName, userInput.lastName, userInput.email, userInput.password, userInput.aboutMe, userInput.gender, sqlDate(userInput.birthday)])
 
-               if(a.insertId){
-                   console.log("data pushed")
+                if (a.insertId) {
                     let token = jwt.sign({
                         email: userInput.email,
-                        role: "customer"
+                        role: "customer",
+                        id: a.insertId,
                     }, "SOME_SUPER_SECRET", {
                         expiresIn: "1h"
                     })
 
-                   let user = {
-                       ...userInput,
-                       id: a.insertId
-                   }
+                    return {
+                        ...userInput,
+                        id: a.insertId,
+                        token
+                    };
 
-                   console.log(user)
+                }
 
-                   // return {
-                   //     user: user,
-                   //     token: token
-                   // }
-
-               }
-
-           } catch (e) {
-               console.log(e)
-           }
-
-            // const existingUser = await User.findOne({ email: args.userInput.email });
-            // if (existingUser) {
-            //     throw new Error('User exists already.');
-            // }
-            // const hashedPassword = await bcrypt.hash(args.userInput.password, 12);
-            //
-            // const user = new User({
-            //     email: args.userInput.email,
-            //     password: hashedPassword
-            // });
-            //
-            // const result = await user.save();
-            // return { ...result._doc, password: null, _id: result.id };
+            } catch (e) {
+                console.log(e)
+            }
         } catch (err) {
             throw err;
         }
     },
 
-    loginUser: async (parent, {userInput} ) => {
+    loginUser: async (parent, {userInput}) => {
 
         try {
             const connection = await connectDatabase()
-            let [data] = await connection.query(`select id, firstName, lastName, role, email, avatar from users where email = ?`,  [userInput.email])
-            if(!data[0]){
+            let [data] = await connection.query(`select id, firstName, lastName, role, email, avatar from users where email = ?`, [userInput.email])
+            if (!data[0]) {
                 // handle error user not registered
                 return
             }
 
             let token = jwt.sign({
                 email: data[0].email,
+                id: data[0].id,
                 role: data[0].role,
             }, JWT_SECRET, {
                 expiresIn: "1h"
@@ -97,13 +77,13 @@ module.exports = {
         try {
 
             let tokenData = jwt.decode(context.token, JWT_SECRET)
-            if(!tokenData){
+            if (!tokenData) {
                 return {}
             }
 
             const connection = await connectDatabase()
-            let [data] = await connection.query(`select id, firstName, lastName, role, email, avatar from users where email = ?`,  [tokenData.email])
-            if(!data[0]){
+            let [data] = await connection.query(`select id, firstName, lastName, role, email, avatar from users where email = ?`, [tokenData.email])
+            if (!data[0]) {
                 // handle error user not registered
                 return
             }

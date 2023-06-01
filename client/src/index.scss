@@ -32,7 +32,7 @@ h1, h2, h3, h4 {
   margin: 0;
 }
 
-.input-effect{
+.input-effect {
   border-radius: 0px !important;
   background: transparent;
   border-color: #e1e1e1 !important;
@@ -58,20 +58,22 @@ h1, h2, h3, h4 {
     padding: 20px 10px !important;
     color: white !important;
 
-    .ant-select-selection-item{
+    .ant-select-selection-item {
       color: white !important;
     }
   }
 
   &.ant-select-open {
     background: var(--primary) !important;
-    border-color: var(--primary)  !important;
+    border-color: var(--primary) !important;
     color: white !important;
+
     .ant-select-selector {
       background-color: transparent !important;
-      border-color: var(--primary)  !important;
+      border-color: var(--primary) !important;
       padding: 8px 10px;
       color: white;
+
       input {
         background: transparent !important;
         color: white !important;
@@ -80,21 +82,22 @@ h1, h2, h3, h4 {
   }
 }
 
-.ant-picker{
-  &.ant-picker-focused{
+.ant-picker {
+  &.ant-picker-focused {
     @extend .input-effect
   }
 
-  input{
+  input {
     color: #f6f6f6 !important;
-    &::placeholder{
+
+    &::placeholder {
       color: #adadad !important;
     }
   }
 }
 
-.ant-input{
-  &::placeholder{
+.ant-input {
+  &::placeholder {
     color: #adadad !important;
   }
 }
@@ -104,55 +107,160 @@ h1, h2, h3, h4 {
     color: white !important;
 
   }
+
   //padding: 0 !important;
 }
 
-.ant-radio-wrapper{
-  span{
+.ant-radio-wrapper {
+  span {
     color: #c7c7c7;
   }
 }
 
-.ant-btn-default{
+.ant-btn-default {
   border-radius: 0 !important;
   background: var(--primary) !important;
   border-color: var(--primary) !important;
-  color:white !important;
+  color: white !important;
   height: auto;
   padding: 8px 20px;
-  &:focus, &:hover{
+
+  &:focus, &:hover {
     background: var(--primary) !important;
     color: white !important;
   }
 }
 
-.input-row{
+.input-row {
   width: max-content;
-  .ant-form-item-row{
+
+  .ant-form-item-row {
     display: flex !important;
     flex-direction: row !important;
     align-items: center;
     column-gap: 20px;
     flex-direction: row-reverse !important;
-    .ant-form-item-label{
+
+    .ant-form-item-label {
       display: block;
       padding: 0 !important;
     }
-    .ant-form-item-control{
+
+    .ant-form-item-control {
       width: max-content;
       flex-grow: 0;
 
-      .ant-form-item-control-input-content{
+      .ant-form-item-control-input-content {
         width: max-content;
       }
     }
   }
 }
 
-.ant-upload{
+.ant-upload {
 
-  &> * {
+  & > * {
     color: #c7c7c7;;
   }
 
+}
+
+.ant-input-number {
+  width: 100%;
+
+  color: white !important;
+
+  &:focus {
+    background: var(--primary) !important;
+    color: white !important;
+  }
+
+  .ant-input-number-handler-wrap {
+    display: none !important;
+  }
+
+  @extend .input-effect;
+
+  .ant-input-number-input-wrap {
+
+    & > * {
+      color: #c7c7c7;;
+    }
+
+    input {
+      height: auto;
+      padding: 0;
+
+      &::placeholder {
+        color: #c7c7c7;
+      }
+    }
+  }
+}
+
+.ant-select-selector {
+  height: auto !important;
+}
+
+.ant-select-multiple {
+  .ant-select-selector {
+    height: auto;
+    background: transparent !important;
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+
+    .ant-select-selection-placeholder {
+      color: #c7c7c7;
+    }
+
+    input {
+      &::placeholder {
+        color: #c7c7c7;
+      }
+    }
+
+    .ant-select-selection-item {
+      background: #2c2c2c;
+
+      .anticon-close {
+        svg {
+          fill: #c2c2c2;
+        }
+      }
+    }
+  }
+}
+
+
+.ant-select-selector {
+  .ant-select-selection-placeholder {
+
+    color: #a9a9a9 !important;
+
+  }
+}
+
+.ant-select-single .ant-select-selector {
+  padding: 4px 10px !important;
+}
+
+.ant-drawer-content-wrapper {
+  .ant-drawer-content {
+    background: #3b3b3b;
+
+    .ant-drawer-header-title {
+
+      .ant-drawer-close {
+        color: white !important;
+      }
+
+      .ant-drawer-title {
+        color: white !important;
+      }
+    }
+  }
+
+  .ant-drawer-body {
+    color: white;
+  }
 }

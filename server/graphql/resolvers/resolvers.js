@@ -1,4 +1,5 @@
 const {createUser, loginUser, authVerify} = require("./auth");
+const {createMovie, getMovies, getMovie} = require("./movie");
 
 
 const users = [
@@ -33,7 +34,15 @@ const resolvers ={
             let user = users.find(u=>u.id === userId)
             console.log(user)
             return user
-        }
+        },
+        getHomeSliderMovies: ()=>{
+            return {
+                title: "TIl",
+                thumb: "sdfjk"
+            }
+        },
+        getMovies: getMovies,
+        getMovie: getMovie
     },
     Mutation: {
         // registerUser: (parent, { input }) => {
@@ -57,13 +66,10 @@ const resolvers ={
         //
         //     return user;
         // },
-
+        createMovie: createMovie,
         createUser: createUser,
         loginUser: loginUser,
 
-
-        createMovie: (parent, { input }) => {
-        },
 
         bookMovie: (parent, { input }) => {
         }

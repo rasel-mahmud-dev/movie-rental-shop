@@ -29,12 +29,40 @@ export const AUTH_FETCHING = gql`
 `;
 
 
-const GET_MOVIES = gql`
-    query GetMovies {
-        users {
+export const GET_MOVIES = gql`
+    query {
+        getMovies {
             id
-            name
-            email
+            title
+            price
+            summary
+            releasedYear
+            genres
+            images
+        }
+    }
+`;
+
+export const GET_MOVIE = gql`
+    query GET_MOVIE($movieId: String!) {
+        getMovie(id: $movieId) {
+            id
+            title
+            price
+            summary
+            releasedYear
+            genres
+            images
+        }
+    }
+`;
+
+
+export const GET_HOME_SLIDER_MOVIES = gql`
+    query {
+        getHomeSliderMovies {
+            title
+            thumb
         }
     }
 `;
@@ -43,3 +71,13 @@ const GET_MOVIES = gql`
 function login(payload){
 
 }
+
+
+export const CREATE_MOVIE = gql`
+    mutation CreateMovie($movieInput: NewMovieInput!) {
+        createMovie(movieInput: $movieInput) {
+            title
+        }
+    }
+
+`
