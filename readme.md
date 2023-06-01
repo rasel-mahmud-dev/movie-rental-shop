@@ -1,13 +1,20 @@
-
+## Movie Rental Shop
 
 
 ### Technologies 
-- Zustand 
+- Zustand (state management)
 - GraphQL
-- MYSQL
+- MYSQL(database)
 - Antd
 - React
-- Tailwindcss
+- Tailwindcss 
+
+### Features
+- User signup/signin.
+- Customer can rent movies.
+- Seller can add or upload movie
+- Admin can handle all thins like  genres, movies, role management.
+- Bkash and Card payment will coming soon.
 
 
 ### Tables 
@@ -42,3 +49,19 @@
 - movieId int
 - rate int
 - customerId
+
+
+
+### Screen shoot
+
+##### Homepage
+![2023-06-01_212953 copy.webp](preview%2F2023-06-01_212953%20copy.webp)
+
+##### Add Movie Page
+![2023-06-01_213232 copy.webp](preview%2F2023-06-01_213232copy.webp)
+
+##### User Registration
+![register copy.webp](preview%2Fregister%20copy.webp)
+
+##### User Login
+![logincopy.webp](preview%2Flogincopy.webp)

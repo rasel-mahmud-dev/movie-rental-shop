@@ -8,10 +8,12 @@ import {GET_HOME_SLIDER_MOVIES, GET_MOVIES} from "../../graphql/queries.js";
 import staticPath from "../../utils/staticPath.js";
 
 import "./homPage.scss"
-import {Button} from "antd";
+import {Button, Tag} from "antd";
 import {useBoundStore} from "../../zustand/store.js";
 import {PlusOutlined} from "@ant-design/icons";
 import {Link} from "react-router-dom";
+import {AiOutlineHeart, AiOutlineShoppingCart} from "react-icons/ai";
+import {BsFillBookmarkFill} from "react-icons/bs";
 
 
 const HomePage = () => {
@@ -71,10 +73,7 @@ Consectetur metus nisi dictum finibus pulvinar montes lacinia. Curae molestie fe
 
     return (
         <div>
-
-
             <div className="home-slider">
-
                 <Slider {...settings} ref={sliderRef}>
                     {slidersMovies.map(item => (
                         <div className="slider-item">
@@ -92,7 +91,7 @@ Consectetur metus nisi dictum finibus pulvinar montes lacinia. Curae molestie fe
                     <div className="slider-content">
                         <div className="inner">
                             <h1>{slidersMovies[0].title}</h1>
-                            <p>{slidersMovies[0].summary}</p>
+                            <p>{slidersMovies[0].summary.substring(0, 230)}...</p>
 
                             <div className="flex items-center gap-x-4 mt-8">
                                 <Button>Buy Now</Button>
@@ -105,7 +104,7 @@ Consectetur metus nisi dictum finibus pulvinar montes lacinia. Curae molestie fe
             </div>
 
 
-            <div className="container">
+            <div className="container py-16">
 
                 <div className="flex movie-category">
                     <li className="active">Featured</li>
@@ -123,29 +122,30 @@ Consectetur metus nisi dictum finibus pulvinar montes lacinia. Curae molestie fe
                             </Link>
                             <h4 className="video-title">{movie.title}</h4>
 
-                            <div className="flex items-center gap-x-2 meta">
+                            <div className="flex items-center justify-between gap-x-2 meta">
                                 <span>{new Date(movie.releasedYear).getFullYear()}</span>
-                                <span>{movie.genres} </span>
+                                <div>{movie?.genres?.map(gen=>(
+                                    <Tag color="primary" className="bg-red-500/10"  bordered={false}>{gen}</Tag>
+                                ))} </div>
                             </div>
 
-                            <div className="action">
-                                <div className="icon-plus">
-                                    <PlusOutlined onClick={()=>handleAddToCart(movie)} />
+                            <div className="action flex flex-row gap-y-2">
+                                <div className="social-icon" onClick={()=>handleAddToCart(movie)}>
+                                    <AiOutlineHeart />
                                 </div>
-                                <div className="icon-plus">
-                                    <PlusOutlined />
+                                <div className="social-icon" onClick={()=>handleAddToCart(movie)}>
+                                    <AiOutlineShoppingCart />
                                 </div>
-                                <div className="icon-plus">
-                                    <PlusOutlined />
+                                <div className="social-icon" >
+                                    <BsFillBookmarkFill />
                                 </div>
+
                             </div>
 
                         </div>
                     ))}
                 </div>
             </div>
-
-
         </div>
     );
 };

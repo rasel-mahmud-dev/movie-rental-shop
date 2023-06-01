@@ -10,9 +10,14 @@ import {BsCart} from "react-icons/bs";
 
 const Header = () => {
 
-    const {auth} = useBoundStore(state=>state)
+    const {auth, setAuth} = useBoundStore(state=>state)
 
     const [isOpenDrawer, setOpenDrawer] = useState(false)
+
+    function handleLogout(){
+        setAuth()
+        localStorage.removeItem("token")
+    }
 
 
     const dropdownRender = ()=> (
@@ -26,7 +31,7 @@ const Header = () => {
             <li className="text-white">
                 <Link className="text-white" to="/my-carts">My Cart</Link>
             </li>
-            <li className="text-white">
+            <li onClick={handleLogout} className="text-white">
                 Log out
             </li>
         </div>
@@ -44,7 +49,7 @@ const Header = () => {
 
                 <div>
                     <main className="flex items-center gapx-x-4">
-                        <li className="nav-item"><Link to="/">Home</Link></li>
+                        <li className="active nav-item"><Link to="/">Home</Link></li>
                         <li className="nav-item"><Link to="/genres">Genres</Link></li>
                         <li className="nav-item"><Link to="/movies">Movies</Link></li>
                         <li className="nav-item"><Link to="/artists">Artists</Link></li>
@@ -59,7 +64,7 @@ const Header = () => {
                         <>
                             <li className="nav-item" onClick={()=>setOpenDrawer(true)}>
 
-                                <Badge size="small" style={{border: "none !important"}} count={23}>
+                                <Badge size="small" style={{border: "none !important"}} count={3}>
                                     <BsCart  className="text-xl text-white    " />
                                 </Badge>
                             </li>

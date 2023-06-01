@@ -5,6 +5,7 @@ import {Outlet} from "react-router-dom";
 import {useBoundStore} from "./zustand/store.js";
 import {useQuery} from "@apollo/client";
 import {AUTH_FETCHING} from "./graphql/queries.js";
+import Footer from "./components/Footer.jsx";
 
 function App() {
 
@@ -22,6 +23,8 @@ function App() {
             <div>
                 <Header/>
                 <Outlet/>
+
+                <Footer />
             </div>
         </>
     )

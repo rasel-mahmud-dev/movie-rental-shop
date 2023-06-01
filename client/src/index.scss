@@ -264,3 +264,41 @@ h1, h2, h3, h4 {
     color: white;
   }
 }
+
+.ant-badge .ant-badge-count {
+  box-shadow: none;
+}
+
+
+.social-icon {
+  @apply  rounded-full
+  text-gray-900 hover:text-white w-10 h-10
+  md:w-8 md:h-8 flex justify-center items-center;
+  border-color: rgb(204 210 255 / 22%);
+  background-color: rgb(154 167 255 / 9%);
+  color: var(--primary);
+
+  &:hover {
+    transform: translateY(1px);
+
+    .svg-inline--fa {
+      color: var(--primary) !important;
+    }
+  }
+
+  transition: all .1s linear;
+
+  .svg-inline--fa {
+    color: #6e6e6e;
+    //font-size: 20px;
+    width: 20px;
+  }
+
+  .fa-facebook-square {
+    color: var(--primary);
+  }
+
+  .fa-instagram {
+    color: red;
+  }
+}
