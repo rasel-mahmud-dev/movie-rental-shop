@@ -25,7 +25,8 @@ const typeDefs =  gql`
         title: String
         thumb: String
         price: Int
-        author: String
+        sellerId: Int
+        seller: User
         genres: [String]
         stock: Int
         country: String

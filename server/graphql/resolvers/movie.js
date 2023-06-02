@@ -6,8 +6,18 @@ const authMiddleware = require("../../middlewares");
 exports.getMovies = async function (parent, payload, context) {
     try{
         let client = await connectDatabase()
-        let [result] = await client.query(`select * from movies`)
-        return result
+        let [result] = await client.query(`select movies.*, u.id as userId, u.firstName, u.role, u.aboutMe, u.gender, u.birthday, u.createdAt, u.updatedAt, u.lastName, u.email, u.avatar  from movies join users u on u.id = movies.id`)
+
+        let mapped = result.map((item)=>{
+            const { role, aboutMe, gender, birthday, createdAt,updatedAt,firstName, lastName, email, avatar, ...movie } = item;
+            return {
+                ...movie,
+                seller: {
+                    role, aboutMe, gender, birthday, createdAt,updatedAt,firstName, lastName, email, avatar,
+                }
+            }
+        })
+        return mapped
     } catch (ex) {
         console.log(ex)
     }

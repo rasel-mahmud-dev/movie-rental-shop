@@ -7,7 +7,6 @@ const {ApolloServer} = require("apollo-server-express")
 // const {ApolloServer} = require("apollo-server")
 const typeDefs = require("./graphql/schema/type-defs");
 const resolvers = require("./graphql/resolvers/resolvers");
-const {connect} = require("mongoose");
 const connectDatabase = require("./helpers/connectDatabase");
 
 
